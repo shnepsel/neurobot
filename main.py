@@ -5,7 +5,7 @@ import openai
 openai.api_base = "https://api.daku.tech/v1"
 
 # Получаем API ключ OpenAI из переменной окружения
-openai.api_key = "sk-OWIwMDA2QjQyQ0FCT3BlbkFJOTlmZGQ1QUREYmIx"
+openai.api_key = "sk-QjBGRDU3Q2JmNzY2T3BlbkFJMkNFQjY1MzY3MTNh"
 
 # Создаем экземпляр телеграм бота
 bot = telebot.TeleBot("6597127566:AAHtsyPwdBzidgv9MCXAPUwchk8QfeAtG3c")
