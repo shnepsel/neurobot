@@ -1,11 +1,5 @@
 import telebot
-import openai
-
-# Устанавливаем URL для API OpenAI
-openai.api_base = "https://api.nova-oss.com/v1" # https://api.daku.tech/v1
-
-# Получаем API ключ OpenAI из переменной окружения
-openai.api_key = "nv2-AXKSI82JfwbcyNxsasE1_NOVA_v2_0ZOQXqs5ILrHDIsQQnNX" # sk-RWFDNjE0N0I3MzEzT3BlbkFJYjVEY0JBZDBDQzRj
+import g4f
 
 # Создаем экземпляр телеграм бота
 bot = telebot.TeleBot("6597127566:AAHtsyPwdBzidgv9MCXAPUwchk8QfeAtG3c")
@@ -35,14 +29,19 @@ def echo(message):
         user_chats[user_id] = user_messages
 
         # Отправляем запрос в API OpenAI
-        response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
-            messages=user_messages,
-            # max_tokens=350  # Максимальное количество токенов в ответе
+        response = g4f.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": message.text}],
+            stream=True,
         )
+
+        for message in response:
+            print(message, flush=True, end='')
+            bot.reply_to(message, response)
         
         # Получаем ответ и отправляем его обратно пользователю
-        bot.reply_to(message, response.choices[0].message["content"])
+        bot.reply_to(message, response)
+
     except Exception as e:
         # Выводим в консоль ошибку и отправляем сообщение об ошибке пользователю
         print(f"Error: {str(e)}")
