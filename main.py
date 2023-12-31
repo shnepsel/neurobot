@@ -1,5 +1,7 @@
 import telebot
 import openai
+import os
+from environs import Env
 
 # Устанавливаем URL для API OpenAI
 openai.api_base = "https://api.nova-oss.com/v1" # https://api.daku.tech/v1
@@ -7,8 +9,14 @@ openai.api_base = "https://api.nova-oss.com/v1" # https://api.daku.tech/v1
 # Получаем API ключ OpenAI из переменной окружения
 openai.api_key = "nv2-AXKSI82JfwbcyNxsasE1_NOVA_v2_0ZOQXqs5ILrHDIsQQnNX" # sk-RWFDNjE0N0I3MzEzT3BlbkFJYjVEY0JBZDBDQzRj
 
+# Создаем экземпляр класса Env
+env = Env()
+ 
+# Читаем файл .env и загружаем из него переменные в окружение
+env.read_env()
+
 # Создаем экземпляр телеграм бота
-bot = telebot.TeleBot("6597127566:AAHtsyPwdBzidgv9MCXAPUwchk8QfeAtG3c")
+bot = telebot.TeleBot(os.getenv('BOT_TOKEN'))
 
 # Словарь для хранения переписки с пользователями
 user_chats = {}
