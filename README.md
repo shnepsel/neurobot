@@ -1,3 +1,3 @@
 python -m venv venv
-venv\Scropts\activate
+venv\Scripts\activate
 pip install telebot openai environs
