@@ -1,0 +1,49 @@
+Введение:
+
+Модуль - фрагмент проекта с обособленной частью кода
+  Импорт одного модуля в другой:
+    import mod_1 || from mod_1 import func_1
+Пакет - директория с модулями
+Подпакет - пакет внутри пакета
+  Импорт модуля из пакета в другой модуль другого пакета:
+    from pack_1 import mod_1
+
+Переменные окружения:
+
+***Не получилось
+1) PowerShell
+
+  PowerShell:
+    $Env:BOT_TOKEN=...
+    echo $Env:BOT_TOKEN
+
+  python_file.py (Получение токена в коде):
+    bot_token = os.getenv('BOT_TOKEN')
+***
+
+2) env (pip install python-dotenv)
+
+  .env:
+    BOT_TOKEN=...
+    ADMIN_ID=...
+
+  python_file.py:
+    import os
+    import dotenv
+    dotenv.load_dotenv()
+
+    bot_token = os.getenv('BOT_TOKEN')
+
+3) Библиотека environs (pip install environs):
+
+  .env:
+    BOT_TOKEN=...
+    ADMIN_ID=...
+
+  python_file.py:
+    from environs import Env
+
+    env = Env()              # Создаем экземпляр класса Env
+    env.read_env()           # Методом read_env() читаем файл .env и загружаем из него переменные в окружение
+
+    bot_token = os.getenv('BOT_TOKEN')
